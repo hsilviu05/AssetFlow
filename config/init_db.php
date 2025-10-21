@@ -39,7 +39,10 @@
             specifications TEXT,
             status TEXT NOT NULL CHECK(status IN ('Available', 'Allocated', 'Service', 'Decommissioned')),
             purchase_date TEXT,
+            os_version VARCHAR(50) NOT NULL,
+            location VARCHAR(100) NOT NULL,
             FOREIGN KEY (type_id) REFERENCES EquipmentTypes(type_id) ON DELETE SET NULL
+            
         );
     ");
 
