@@ -52,11 +52,13 @@
             allocation_id INTEGER PRIMARY KEY AUTOINCREMENT,
             equipment_id INTEGER NOT NULL,
             employee_id INTEGER NOT NULL,
+            admin_id INTEGER NOT NULL,
             allocation_date TEXT NOT NULL,
             estimated_return_date TEXT,
             notes TEXT,
             FOREIGN KEY (equipment_id) REFERENCES Equipment(equipment_id) ON DELETE CASCADE,
-            FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) ON DELETE CASCADE
+            FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) ON DELETE CASCADE,
+            FOREIGN KEY (admin_id) REFERENCES Employees(employee_id) ON DELETE CASCADE`
         );
     ");
 

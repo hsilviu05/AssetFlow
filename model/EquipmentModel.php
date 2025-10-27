@@ -1,5 +1,5 @@
 <?php
-    class Equipment extends CRUDInterface
+    class EquipmentModel extends CRUDInterface
     {
         private $db;
 
@@ -49,16 +49,16 @@
         }
 
         public function getEquipmentTypeIdByName($typeName)
-    {
-        $stmt = $this->db->prepare("SELECT type_id FROM EquipmentType WHERE type_name = :type_name");
-        $stmt->bindParam(':type_name', $typeName);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result ? $result['type_id'] : null;
-    }
+        {
+            $stmt = $this->db->prepare("SELECT type_id FROM EquipmentType WHERE type_name = :type_name");
+            $stmt->bindParam(':type_name', $typeName);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ? $result['type_id'] : null;
+        }
 
 
-        private function getEquipmentStatus($equipmentId): string
+        public function getEquipmentStatus($equipmentId): string
         {
             $stmt = $this->connection->prepare("SELECT status FROM Equipment WHERE equipment_id = :equipment_id");
             $stmt->bindParam(':equipment_id', $equipmentId, PDO::PARAM_INT);
@@ -72,7 +72,7 @@
             }
         }
 
-        private function updateEquipmentStatus($equipmentId, array $data): bool
+        public function updateEquipmentStatus($equipmentId, array $data): bool
         {
             $setClause = "";
             foreach ($data as $key => $value) {
