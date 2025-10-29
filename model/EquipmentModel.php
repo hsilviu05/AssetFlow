@@ -1,5 +1,8 @@
 <?php
-    class EquipmentModel extends CRUDInterface
+    require_once __DIR__ . '/BaseModel.php';
+    require_once __DIR__ . '/../config/DBConnection.php';
+    
+    class EquipmentModel extends BaseModel
     {
         private $db;
 
@@ -24,10 +27,26 @@
 
         public function save(array $data)
         {
-            $stmt = $this->db->prepare("INSERT INTO Equipment (name, type_id, purchase_date) VALUES (:name, :type_id, :purchase_date)");
-            $stmt->bindParam(':name', $data['name']);
-            $stmt->bindParam(':type_id', $data['type_id'], PDO::PARAM_INT);
-            $stmt->bindParam(':purchase_date', $data['purchase_date']);
+            $specifications = isset($data['specifications']) ? $data['specifications'] : '';
+            $photoPath = isset($data['photo_path']) ? $data['photo_path'] : null;
+            
+            $stmt = $this->db->prepare("
+                INSERT INTO Equipment 
+                (inventory_code, name, type_id, specifications, status, purchase_date, os_version, location, photo_path) 
+                VALUES 
+                (:inventory_code, :name, :type_id, :specifications, :status, :purchase_date, :os_version, :location, :photo_path)
+            ");
+            
+            $stmt->bindValue(':inventory_code', $data['inventory_code']);
+            $stmt->bindValue(':name', $data['name']);
+            $stmt->bindValue(':type_id', $data['type_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':specifications', $specifications);
+            $stmt->bindValue(':status', $data['status']);
+            $stmt->bindValue(':purchase_date', $data['purchase_date']);
+            $stmt->bindValue(':os_version', $data['os_version']);
+            $stmt->bindValue(':location', $data['location']);
+            $stmt->bindValue(':photo_path', $photoPath);
+            
             return $stmt->execute();
         }
 
@@ -60,7 +79,7 @@
 
         public function getEquipmentStatus($equipmentId): string
         {
-            $stmt = $this->connection->prepare("SELECT status FROM Equipment WHERE equipment_id = :equipment_id");
+            $stmt = $this->db->prepare("SELECT status FROM Equipment WHERE equipment_id = :equipment_id");
             $stmt->bindParam(':equipment_id', $equipmentId, PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -79,7 +98,7 @@
                 $setClause .= "$key = :$key, ";
             }
             $setClause = rtrim($setClause, ", ");
-            $stmt = $this->connection->prepare("UPDATE Equipment SET $setClause WHERE equipment_id = :equipment_id");
+            $stmt = $this->db->prepare("UPDATE Equipment SET $setClause WHERE equipment_id = :equipment_id");
             foreach ($data as $key => $value) {
                 $stmt->bindValue(":$key", $value);
             }

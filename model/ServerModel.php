@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/EquipmentModel.php';
 
 class ServerModel extends EquipmentModel
 {
@@ -58,7 +59,7 @@ class ServerModel extends EquipmentModel
             throw new Exception("Equipment type 'Server' not found in the database.");
         }
 
-        $data['type_id'] = $serverId;
+        $data['type_id'] = $ServerID;
     
         return parent::save($data);
     }

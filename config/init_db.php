@@ -41,6 +41,7 @@
             purchase_date TEXT,
             os_version VARCHAR(50) NOT NULL,
             location VARCHAR(100) NOT NULL,
+            photo_path VARCHAR(255),
             FOREIGN KEY (type_id) REFERENCES EquipmentTypes(type_id) ON DELETE SET NULL
             
         );
@@ -58,7 +59,7 @@
             notes TEXT,
             FOREIGN KEY (equipment_id) REFERENCES Equipment(equipment_id) ON DELETE CASCADE,
             FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) ON DELETE CASCADE,
-            FOREIGN KEY (admin_id) REFERENCES Employees(employee_id) ON DELETE CASCADE`
+            FOREIGN KEY (admin_id) REFERENCES Employees(employee_id) ON DELETE CASCADE
         );
     ");
 

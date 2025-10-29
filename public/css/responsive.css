@@ -1,0 +1,57 @@
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+    
+    .carousel-container {
+        height: 250px;
+    }
+    
+    .equipment-table {
+        font-size: 0.9rem;
+    }
+    
+    .equipment-table th,
+    .equipment-table td {
+        padding: 8px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 100%;
+    }
+    
+    .carousel-container {
+        height: 350px;
+    }
+}
+
+/* Large Screens */
+@media (min-width: 1025px) {
+    .container {
+        padding: 2rem;
+    }
+    
+    .equipment-table {
+        font-size: 1rem;
+    }
+}

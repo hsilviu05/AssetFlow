@@ -1,0 +1,17 @@
+{
+    "name": "daw/asset-management",
+    "description": "Asset Management System for DAW Project",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "": ["model/", "controller/", "config/"]
+        }
+    }
+}
+

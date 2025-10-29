@@ -1,10 +1,10 @@
 <?php
-    abstract class CRUDInterface 
+    interface CRUDInterface 
     {
-        abstract public function find($id);
-        abstract public function findAll();
-        abstract public function save(array $data);
-        abstract public function update($id, array $data);
-        abstract public function delete($id);
+        public function find($id);
+        public function findAll();
+        public function save(array $data);
+        public function update($id, array $data);
+        public function delete($id);
     }
 ?>
