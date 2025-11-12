@@ -20,23 +20,18 @@ require_once __DIR__ . '/config/DBConnection.php';
 
 session_start();
 
-// Redirect to login if not authenticated (except for login page)
 $action = $_GET['action'] ?? 'index';
 $controller = $_GET['controller'] ?? 'auth';
 
-// Public routes that don't require authentication
 $publicRoutes = ['auth'];
 
-// Check if user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
 
-// If logged in and on default page, redirect to equipment list
 if ($controller == 'auth' && $isLoggedIn && $action == 'index') {
     header('Location: index.php?controller=equipment&action=list');
     exit;
 }
 
-// Redirect to login if not logged in and trying to access protected routes
 if (!in_array($controller, $publicRoutes) && !$isLoggedIn) {
     header('Location: index.php?controller=auth&action=login');
     exit;
@@ -55,7 +50,7 @@ switch ($controller) {
                 } else {
                     require_once __DIR__ . '/model/EquipmentModel.php';
                     $model = new EquipmentModel();
-                    $equipmentTypes = []; // You can add equipment types if needed
+                    $equipmentTypes = [];
                     include __DIR__ . '/view/equipment/add.php';
                 }
                 break;

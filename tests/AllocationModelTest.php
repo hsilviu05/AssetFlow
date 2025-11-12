@@ -21,11 +21,10 @@ class AllocationModelTest extends TestCase
     
     public function testAllocationThrowsExceptionForUnavailableEquipment()
     {
-        // This test expects an exception when equipment is not found or unavailable
         $this->expectException(Exception::class);
         
         $data = [
-            'equipment_id' => 99999, // Non-existent equipment
+            'equipment_id' => 99999,
             'employee_id' => 1,
             'admin_id' => 1,
             'allocation_date' => date('Y-m-d')

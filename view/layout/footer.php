@@ -5,7 +5,7 @@
 </footer>
 
 <script>
-// Carousel JavaScript
+
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 

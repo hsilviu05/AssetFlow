@@ -18,7 +18,11 @@ require_once __DIR__ . '/../layout/header.php';
         
         <div class="form-group">
             <label>Type ID:</label>
-            <input type="number" name="type_id" required>
+            <select name="type_id" required>
+                <option value="1">Laptop</option>
+                <option value="2">Desktop</option>
+                <option value="3">Server</option>
+            </select>
         </div>
         
         <div class="form-group">

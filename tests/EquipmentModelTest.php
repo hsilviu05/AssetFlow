@@ -14,13 +14,11 @@ class EquipmentModelTest extends TestCase
     {
         $this->model = new EquipmentModel();
         
-        // Ensure Equipment Type exists for tests
         $db = DBConnection::getInstance()->getConnection();
         $stmt = $db->query("SELECT type_id FROM EquipmentTypes LIMIT 1");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if (!$result) {
-            // Create a test equipment type
             $db->exec("INSERT INTO EquipmentTypes (type_name, description) VALUES ('Test Type', 'For testing')");
         }
         
@@ -77,7 +75,6 @@ class EquipmentModelTest extends TestCase
     
     public function testDeleteRemovesEquipment()
     {
-        // First create
         $data = [
             'inventory_code' => 'DELETE' . time(),
             'name' => 'To Delete',
@@ -90,13 +87,11 @@ class EquipmentModelTest extends TestCase
         ];
         $this->model->save($data);
         
-        // Get last inserted ID
         $stmt = DBConnection::getInstance()->getConnection()->query("SELECT equipment_id FROM Equipment ORDER BY equipment_id DESC LIMIT 1");
         $lastRow = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($lastRow && isset($lastRow['equipment_id'])) {
             $lastId = $lastRow['equipment_id'];
-            // Then delete
             $result = $this->model->delete($lastId);
             $this->assertTrue($result);
         } else {
